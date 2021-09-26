@@ -1,0 +1,218 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    color: black;
+}
+body{
+    background: white;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+input {
+    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid grey;
+    line-height: 20px;
+    color: dimgrey;
+    font-size: 16px;
+}
+/* header
+*/
+header{
+    background: aliceblue;
+    height: 58px;
+}
+/* all in header
+header *{
+
+} -->
+
+*/
+header h2{
+    margin-top: 9px;
+}
+/* header h2 a{
+
+}
+*/
+header h2 a:hover{
+    color: black;
+}
+header ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+}
+header ul li{
+    float: left;
+    position: relative;
+}
+header ul li a{
+    display: block;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+    padding: 17px;
+}
+header ul li a:hover{
+    background: lightblue;
+    transition: 0.5s;
+    color: black;
+}
+header ul li ul{
+    position: absolute;
+    top: 58px;
+    right: 0px;
+    width: 108px;
+    display: none;
+    z-index: 11;
+}
+header ul li:hover ul{
+    display: block;
+}
+header ul li ul li{
+    width: 100%;
+}
+header ul li ul li a{
+    padding: 10px;
+    background: aliceblue;
+}
+/*
+Footer
+ */
+
+.footer{
+    background: #1f1f1f;
+    color: white;
+    position: relative;
+}
+.footer .footer-section{
+    padding: 22px;
+}
+.footer .about h3{
+    padding-top: 22px;
+    color: white;
+}
+.footer .contact {
+    padding-top: 35px;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: right;
+}
+.footer .socials{
+    text-align: center;
+}
+.footer .socials a{
+    width: 40px;
+    height: 40px;
+    padding-top: 25px;
+    margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 30px;
+    transition: all .3s;
+    color: white;
+}
+
+/*
+Sidebar
+ */
+.sidebar{
+    margin: 16px 0;
+    background: aliceblue;
+    min-height: 600px;
+}
+.sidebar ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    color: black;
+}
+.sidebar ul a{
+    padding: 18px;
+    display: block;
+    border-bottom: 1px solid black;
+}
+.sidebar ul a:hover{
+    padding-left: 10px;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: black;
+}
+.articles{
+    height: 100%;
+    padding: 40px 50px 100px;
+    overflow-y: scroll;
+
+}
+.articles h3{
+    text-align: left;
+
+}
+.articles .button .btn-primary{
+    margin: 5px;
+    width: 150px;
+}
+.articles .button .btn-primary a{
+    width: fit-content;
+}
+.articles .title-table div{
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+}
+.articles .article div{
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid black;
+}
+.articles .article .edit{
+    color: black;
+
+}
+.articles .article .edit:hover{
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    transition: all 0.3s;
+}
+.articles .article .edit a:hover{
+    text-decoration: none;
+    color: black;
+}
+.articles .article .delete{
+    color: red;
+}
+.articles .article .delete:hover {
+    text-decoration: none;
+    color: red;
+    padding-left: 10px;
+    transition: all 0.3s;
+}
+.articles .article .delete a:hover{
+    text-decoration: none;
+    color: red;
+}
+/*
+Creation
+ */
+/*
+.add-article div{
+    margin: 15px 0;
+}
+*/
+
