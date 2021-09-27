@@ -1,5 +1,6 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/articles.php");
 ?>
 
 <!doctype html>
@@ -53,33 +54,44 @@ include("../../path.php")
                 <div class="col-1">
                     ID
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     Title
                 </div>
                 <div class="col-2">
                     Author
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     Manage
                 </div>
             </div>
+            <?php foreach ($articlesAdm as $key => $article): ?>
             <div class="row article">
                 <div class="col-1">
-                    23
+                    <?=$key + 1; ?>
                 </div>
-                <div class="col-5">
-                    Some lorem ipsum.
+                <div class="col-3">
+                    <?=$article['title']; ?>
                 </div>
                 <div class="col-2">
-                    John
+                    <?=$article['username']; ?>
                 </div>
                 <div class="edit col-2">
-                    <a href="">Edit</a>
+                    <a href="edit.php?id=<?=$article['id'] ;?>">Edit</a>
                 </div>
                 <div class="delete col-2">
-                    <a href="">Delete</a>
+                    <a href="edit.php?delete_id=<?=$article['id'] ;?>">Delete</a>
                 </div>
+                <?php if ($article['status']): ?>
+                    <div class="status col-2">
+                        <a href="edit.php?publish=0&pub_id=<?=$article['id'] ;?>">Archive</a>
+                    </div>
+                <?php else: ?>
+                    <div class="status col-2">
+                        <a href="edit.php?publish=1&pub_id=<?=$article['id'] ;?>">Publish</a>
+                    </div>
+                <?php endif; ?>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

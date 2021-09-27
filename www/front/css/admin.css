@@ -152,6 +152,9 @@ Sidebar
     text-decoration: none;
     color: black;
 }
+/*
+Articles
+ */
 .articles{
     height: 100%;
     padding: 40px 50px 100px;
@@ -207,6 +210,21 @@ Sidebar
     text-decoration: none;
     color: red;
 }
+
+.articles .article .status{
+    color: black;
+
+}
+.articles .article .status:hover{
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    transition: all 0.3s;
+}
+.articles .article .status a:hover{
+    text-decoration: none;
+    color: black;
+}
 /*
 Creation
  */
@@ -215,4 +233,17 @@ Creation
     margin: 15px 0;
 }
 */
+
+/*
+Error msg
+ */
+.articles .err{
+    padding: 16px 0;
+    color: red;
+}
+.articles .err ul{
+    padding-left: 0;
+    list-style-type: none;
+    color: red;
+}
 

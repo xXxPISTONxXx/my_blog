@@ -1,5 +1,6 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/articles.php");
 ?>
 
 <!doctype html>
@@ -46,33 +47,41 @@ include("../../path.php")
         <?php include("../../include/sidebar_admin.php"); ?>
         <div class="articles col-10">
             <h3>CREATE NEW ARTICLE</h3>
+            <div class="mb-3 col-12 col-md-4 err">
+                <!--Array with errors-->
+                <?php include("../../logic/helpers/error_info.php"); ?>
+            </div>
             <!--<div class="button row mb-4">
                 <a href="" class="btn btn-info">Add</a>
                 <a href="" class="btn btn-info">Manage</a>
             </div>-->
             <div class="row add-article">
-                <form action="create.php" method="post">
+                <form action="create.php" method="post" enctype="multipart/form-data">
                     <div class="col mb-4">
                         <label for="article" class="form-label">Title of article</label>
-                        <input type="text" class="form-control" placeholder="e.g. Hello, world!..." aria-label="Article title">
+                        <input value="<?=$title; ?>" name="title" type="text" class="form-control" placeholder="e.g. Hello, world!..." aria-label="Article title">
                     </div>
                     <div class="col mb-4">
                         <label for="editor" class="form-label">Text of article</label>
-                        <textarea id="editor" class="form-control" placeholder="e.g. My name is John and this is my new article!..."
+                        <textarea value="<?=$content; ?>" name="content" id="editor" class="form-control" placeholder="e.g. My name is John and this is my new article!..."
                                   rows="6"></textarea>
                     </div>
                     <div class="input-group mb-4">
-                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <input name="img" type="file" class="form-control" id="inputGroupFile02">
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
-                    <select class="form-select mb-4" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="category" class="form-select mb-4" aria-label="Default select example">
+                        <option selected>Category:</option>
+                        <?php foreach ($categories as $key => $category): ?>
+                        <option value="<?=$category['id'];?>"><?=$category['name'];?></option>
+                        <?php endforeach; ?>
                     </select>
-                    <div class="col mb-4">
-                        <button class="btn btn-primary" type="submit">Create</button>
+                    <div class="col col-6">
+                        <input class="form-check-input" type="checkbox" name="publish" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">Publish</label>
+                    </div>
+                    <div class="col col-6">
+                        <button name="add_article" class="btn btn-primary" type="submit">Create</button>
                     </div>
                 </form>
             </div>

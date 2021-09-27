@@ -293,3 +293,14 @@ form div.err p{
     color: indianred;
     font-size: 14px;
 }
+
+/*
+Error msg
+ */
+.add-article .err{
+    padding: 16px 0;
+    color: red;
+}
+.add-article .err ul{
+    list-style-type: none;
+}

@@ -1,5 +1,6 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/users.php");
 ?>
 
 <!doctype html>
@@ -44,7 +45,7 @@ include("../../path.php")
     <div class="row">
         <?php include("../../include/sidebar_admin.php"); ?>
         <div class="articles col-10">
-            <h3>USER CONTROL</h3>
+            <h3>USERS</h3>
             <div class="button row">
                 <a href="<?=BASE_URL . 'admin/users/create.php';?>" class="btn btn-primary">Add</a>
             </div>
@@ -52,8 +53,11 @@ include("../../path.php")
                 <div class="col-1">
                     ID
                 </div>
-                <div class="col-5">
-                    Username
+                <div class="col-2">
+                    Login
+                </div>
+                <div class="col-3">
+                    E-mail
                 </div>
                 <div class="col-2">
                     Administration rights
@@ -62,23 +66,34 @@ include("../../path.php")
                     Manage
                 </div>
             </div>
+            <?php foreach ($users as $key => $user): ?>
             <div class="row article">
                 <div class="col-1">
-                    23
+                    <?=$user['id']; ?>
                 </div>
-                <div class="col-5">
-                    Pidor123
+                <div class="col-2">
+                    <?=$user['login']; ?>
                 </div>
+                <div class="col-3">
+                    <?=$user['email']; ?>
+                </div>
+                <?php if ($user['admin'] ==1): ?>
                 <div class="col-2">
                     Admin
                 </div>
+                <?php else: ?>
+                <div class="col-2">
+                    User
+                </div>
+                <?php endif; ?>
                 <div class="edit col-2">
-                    <a href="">Edit</a>
+                    <a href="index.php?edit_id=<?=$user['id']; ?>">Edit</a>
                 </div>
                 <div class="delete col-2">
-                    <a href="">Delete</a>
+                    <a href="index.php?delete_id=<?=$user['id']; ?>">Delete</a>
                 </div>
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

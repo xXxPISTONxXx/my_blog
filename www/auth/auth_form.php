@@ -1,5 +1,5 @@
 <?php
-/*include("../path.php");*/
+include("../path.php");
 include("../logic/controllers/users.php");
 ?>
 
@@ -41,15 +41,16 @@ include("../logic/controllers/users.php");
 
 <!--Form block-->
 <div class="container reg-form">
-    <form class="row justify-content-center" method="post" action="../logic/controllers/users.php">
+    <form class="row justify-content-center" method="post" action="auth_form.php">
         <h2 class="col-12">PLEASE, SIGN-IN</h2>
         <div class="mb-3 col-12 col-md-4 err">
-            <p><?=$errorMsg?></p>
+            <!--Array with errors-->
+            <?php include("../logic/helpers/error_info.php"); ?>
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">LOGIN</label>
-            <input type="text" name="login" value="<?=$login?>" class="form-control" id="formGroupExampleInput" placeholder="">
+            <input type="text" name="login" value="<?=$login;?>" class="form-control" id="formGroupExampleInput" placeholder="">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">

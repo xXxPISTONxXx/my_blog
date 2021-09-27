@@ -1,6 +1,6 @@
 <?php
 include('path.php');
-include('logic/database/db.php');
+include("logic/controllers/categories.php");
 
 ?>
 
@@ -125,11 +125,10 @@ include('logic/database/db.php');
                 <div class="section categories">
                     <h3>Categories</h3>
                     <ul>
-                        <li><a href="#">Automobiles</a></li>
-                        <li><a href="#">Life</a></li>
-                        <li><a href="#">Sport</a></li>
-                        <li><a href="#">Nature</a></li>
-                        <li><a href="#">Photography</a></li>
+                        <?php foreach($categories as $key => $category): ?>
+                        <li><a href="#"><?=$category['name'];?></a></li>
+                        <?php endforeach; ?>
+
                     </ul>
                 </div>
             </div>

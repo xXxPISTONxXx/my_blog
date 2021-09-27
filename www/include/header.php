@@ -12,17 +12,7 @@
                 <nav class="col-8">
                     <ul>
                         <li><a href="<?php echo BASE_URL ?>">MAIN</a></li>
-                        <li><a href="#">
-                                TOPICS
-                            </a>
-                            <ul>
-                                <li><a href="">AUTOMOBILES</a></li>
-                                <li><a href="">LIFE</a></li>
-                                <li><a href="">SPORT</a></li>
-                                <li><a href="">NATURE</a></li>
-                                <li><a href="">PHOTOGRAPHY</a></li>
-                            </ul>
-                        </li>
+
                         <!-- <li><a href="#">LOL</a></li> -->
                         <li><a href="#">
                                 ABOUT ME
@@ -49,16 +39,6 @@
                 <nav class="col-8">
                     <ul>
                         <li><a href="<?php echo BASE_URL ?>">MAIN</a></li>
-                        <li><a href="#">
-                                TOPICS
-                            </a>
-                            <ul>
-                                <li><a href="">AUTOMOBILES</a></li>
-                                <li><a href="">LIFE</a></li>
-                                <li><a href="">SPORT</a></li>
-                                <li><a href="">NATURE</a></li>
-                                <li><a href="">PHOTOGRAPHY</a></li>
-                            </ul>
                         <li><a href="#">
                                 ABOUT ME
                             </a>

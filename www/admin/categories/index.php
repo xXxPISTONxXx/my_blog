@@ -1,5 +1,7 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/categories.php");
+
 ?>
 
 <!doctype html>
@@ -49,6 +51,9 @@ include("../../path.php")
                 <a href="<?=BASE_URL . 'admin/categories/create.php';?>" class="btn btn-primary">Add</a>
             </div>
             <div class="row title-table">
+                <?php
+
+                ?>
                 <div class="col-1">
                     ID
                 </div>
@@ -59,20 +64,22 @@ include("../../path.php")
                     Manage
                 </div>
             </div>
+            <?php foreach($categories as $key => $category): ?>
             <div class="row article">
                 <div class="col-1">
-                    23
+                    <?=$key + 1;?>
                 </div>
                 <div class="col-5">
-                    Nature
+                    <?=$category['name'];?>
                 </div>
                 <div class="edit col-2">
-                    <a href="">Edit</a>
+                    <a href="edit.php?id=<?=$category['id'];?>">Edit</a>
                 </div>
                 <div class="delete col-2">
-                    <a href="">Delete</a>
+                    <a href="edit.php?del_id=<?=$category['id'];?>">Delete</a>
                 </div>
             </div>
+            <?php endforeach;?>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <?php
-    /*include("../path.php");*/
+    include("../path.php");
     include("../logic/controllers/users.php");
 ?>
 
@@ -44,23 +44,24 @@
 <form class="row justify-content-center" method="post" action="reg_form.php">
     <h2 class="col-12">REGISTRATION FORM</h2>
     <div class="mb-3 col-12 col-md-4 err">
-        <p><?=$errorMsg?></p>
+        <!--Array with errors-->
+        <?php include("../logic/helpers/error_info.php"); ?>
     </div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
         <label for="formGroupExampleInput" class="form-label">USERNAME</label>
-        <input type="text" name="username" value="<?=$username?>" class="form-control" id="formGroupExampleInput" placeholder="">
+        <input type="text" name="username" value="<?=$username;?>" class="form-control" id="formGroupExampleInput" placeholder="">
     </div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
         <label for="exampleInputEmail1" class="form-label">E-MAIL ADDRESS</label>
-        <input type="email" name="email" value="<?=$email?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="email" name="email" value="<?=$email;?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else!</div>
     </div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
         <label for="formGroupExampleInput" class="form-label">LOGIN</label>
-        <input type="text" name="login" value="<?=$login?>" class="form-control" id="formGroupExampleInput" placeholder="">
+        <input type="text" name="login" value="<?=$login;?>" class="form-control" id="formGroupExampleInput" placeholder="">
     </div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">

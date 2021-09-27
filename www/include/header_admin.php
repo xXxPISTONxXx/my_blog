@@ -14,7 +14,7 @@
                         <a href="">
                             <!-- profile icon -->
                             <i></i>
-                            HI, <strong><?=$_SESSION['username']?></strong>
+                            HI, <strong><?=$_SESSION['username'];?></strong>
                         </a>
                         <ul>
                             <!--<li><a href="#">PROFILE</a></li>-->

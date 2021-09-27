@@ -2,11 +2,13 @@
 require('connect.php');
 session_start();
 
-function tt($value) {
-    echo'<pre>';
+function tt($value)
+{
+    echo '<pre>';
     print_r($value);
     echo '</pre>';
 }
+
 global $pdo;
 //Check DB conn
 function dbCheckError($query) {
@@ -119,8 +121,29 @@ function update($table, $id, $params) {
 function delete($table, $id) {
     global $pdo;
 
-    $sql = "DELETE FROM $table WHERE id = $id";
+    $sql = "DELETE FROM $table WHERE id =". $id;
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
+}
+
+//Articles select with userid
+function selectAllFromArticlesWithUsers($table1, $table2) {
+    global $pdo;
+    $sql = "
+    SELECT  
+    t1.id,
+    t1.title,
+    t1.img,
+    t1.content,
+    t1.status,
+    t1.id_category,
+    t1.pubdate,
+    t2.username
+    FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_user = t2.id
+    ";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
 }

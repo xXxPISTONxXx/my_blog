@@ -1,5 +1,6 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/users.php");
 ?>
 
 <!doctype html>
@@ -45,11 +46,11 @@ include("../../path.php")
         <?php include("../../include/sidebar_admin.php"); ?>
         <div class="articles col-10">
             <h3>CREATE NEW USER</h3>
-            <!--<div class="button row">
-                <a href="" class="btn btn-info">Add</a>
-                <a href="" class="btn btn-info">Manage</a>
-            </div>-->
             <div class="row add-article">
+                <div class="mb-3 col-12 col-md-4 err">
+                    <!--Array with errors-->
+                    <?php include("../../logic/helpers/error_info.php"); ?>
+                </div>
                 <form action="create.php" method="post">
                     <div class="col mb-4">
                         <label for="formGroupExampleInput" class="form-label">Username</label>
@@ -72,13 +73,12 @@ include("../../path.php")
                         <label for="exampleInputPassword1" class="form-label">Confirm password</label>
                         <input type="password" name="pass-second" class="form-control" id="exampleInputPassword2">
                     </div>
-                    <label for="admin" class="form-label">Privilege</label>
-                    <select class="form-select mb-4" id="admin" aria-label="Default select example">
-                        <option selected>User</option>
-                        <option value="1">Admin</option>
-                    </select>
-                    <div class="col">
-                        <button class="btn btn-primary" type="submit">Create</button>
+                    <div class="col col-6">
+                        <label class="form-check-label" for="flexCheckChecked">Admin?</label>
+                        <input class="form-check-input" value="1" type="checkbox" name="admin" id="flexCheckChecked">
+                    </div>
+                    <div class="col col-6 mt-4">
+                        <button name="create-user" class="btn btn-primary" type="submit">Create</button>
                     </div>
                 </form>
             </div>

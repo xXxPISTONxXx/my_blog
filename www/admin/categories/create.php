@@ -1,5 +1,6 @@
-<?php session_start();
-include("../../path.php")
+<?php
+include("../../path.php");
+include("../../logic/controllers/categories.php");
 ?>
 
 <!doctype html>
@@ -45,6 +46,9 @@ include("../../path.php")
         <?php include("../../include/sidebar_admin.php"); ?>
         <div class="articles col-10">
             <h3>CREATE NEW CATEGORY</h3>
+            <div class="mb-3 col-12 col-md-4 err">
+                <p><?=$errorMsg;?></p>
+            </div>
             <!--<div class="button row">
                 <a href="" class="btn btn-info">Add</a>
                 <a href="" class="btn btn-info">Manage</a>
@@ -53,15 +57,15 @@ include("../../path.php")
                 <form action="create.php" method="post">
                     <div class="col mb-4">
                         <label for="article" class="form-label">Category name</label>
-                        <input type="text" class="form-control" placeholder="e.g. Automobiles..." aria-label="Category name">
+                        <input type="text" name="name" value="<?=$name;?>" class="form-control" placeholder="e.g. Automobiles..." aria-label="Category name">
                     </div>
                     <div class="col mb-4">
                         <label for="content" class="form-label">Category description</label>
-                        <textarea class="form-control" id="content" placeholder="e.g. This category is about automobiles..."
-                                  rows="3"></textarea>
+                        <textarea class="form-control" name="description" id="content" placeholder="e.g. This category is about automobiles..."
+                                  rows="3"><?=$description;?></textarea>
                     </div>
                     <div class="col mb-4">
-                        <button class="btn btn-primary" type="submit">Create category</button>
+                        <button class="btn btn-primary" name="category-create" type="submit">Create category</button>
                     </div>
                 </form>
             </div>
