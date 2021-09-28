@@ -147,3 +147,14 @@ function selectAllFromArticlesWithUsers($table1, $table2) {
     dbCheckError($query);
     return $query->fetchAll();
 }
+
+//Articles select with userid on main
+function selectAllFromArticlesWithUsersOnIndex($table1, $table2) {
+    global $pdo;
+    $sql = "
+    SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.status=1";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}

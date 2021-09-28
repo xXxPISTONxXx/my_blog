@@ -77,7 +77,7 @@ include("../../logic/controllers/users.php");
                 <div class="col-3">
                     <?=$user['email']; ?>
                 </div>
-                <?php if ($user['admin'] ==1): ?>
+                <?php if ($user['admin'] == 1): ?>
                 <div class="col-2">
                     Admin
                 </div>
@@ -87,7 +87,7 @@ include("../../logic/controllers/users.php");
                 </div>
                 <?php endif; ?>
                 <div class="edit col-2">
-                    <a href="index.php?edit_id=<?=$user['id']; ?>">Edit</a>
+                    <a href="edit.php?edit_id=<?=$user['id']; ?>">Edit</a>
                 </div>
                 <div class="delete col-2">
                     <a href="index.php?delete_id=<?=$user['id']; ?>">Delete</a>

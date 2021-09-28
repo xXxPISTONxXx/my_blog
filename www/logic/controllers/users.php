@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])) {
             $_SESSION['admin'] = $user['admin'];
 
             if ($_SESSION['admin']) {
-                header('location: ' . BASE_URL . 'admin/admin.php');
+                header('location: ' . BASE_URL . 'admin/users/index.php');
             } else {
                 header('location: ' . BASE_URL);
             }
@@ -168,62 +168,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['edit_id'])) {
 
     $id = $user['id'];
     $admin = $user['admin'];
+    $username = $user['username'];
     $login = $user['login'];
     $email = $user['email'];
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_article'])) {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])) {
     $id = $_POST['id'];
-    $title = trim($_POST['title']);
-    $content = trim($_POST['content']);
-    $category = trim($_POST['category']);
-    $publish = isset($_POST['publish']) ? 1 : 0;
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $login = trim($_POST['login']);
+    $passwordF = trim($_POST['pass-first']);
+    $passwordS = trim($_POST['pass-second']);
+    $admin = isset($_POST['admin']) ? 1 : 0;
 
-    //Need function
-    if (!empty($_FILES['img']['name'])) {
-        $imgName = time() . "_" . $_FILES['img']['name'];
-        $fileTmpName = $_FILES['img']['tmp_name'];
-        $fileType = $_FILES['img']['type'];
-        $destination = ROOT_PATH . "/front/images/articles//" . $imgName;
 
-        if (str_contains($fileType, 'image') === false) {
-            //Trouble in error viewing (if file not an image !!)
-            array_push($errorMsg, "Uploaded file is not image!");
-        } else {
-            $result = move_uploaded_file($fileTmpName, $destination);
-            if ($result) {
-                $_POST['img'] = $imgName;
-            } else {
-                array_push($errorMsg, "Image uploading error!");
+    if ($username === '' || $email === '' || $login === '') {
+        array_push($errorMsg, "All fields must be filled!");
+    } elseif (mb_strlen($login, 'UTF8') < 2) {
+        array_push($errorMsg, "Login must include at least 2 symbols!");
+    } elseif (mb_strlen($username, 'UTF8') < 5) {
+        array_push($errorMsg, "Username must include at least 5 symbols!");
+    } elseif ($passwordF !== $passwordS) {
+        array_push($errorMsg, "Passwords are not the same!");
+    } else {
+        $existenceMail = selectOne('users', ['email' => $email]);
+        if ($existenceMail != false && $existenceMail['email'] === $email) {
+            array_push($errorMsg, "This mail is already used!");
+        } elseif ($existenceLogin = selectOne('users', ['login' => $login])) {
+            if ($existenceLogin != false && $existenceLogin['login'] === $login) {
+                array_push($errorMsg, "This login is already used!");
             }
         }
-    } else {
-        array_push($errorMsg, "Image receiving error!");
-    }
 
-
-    if ($title === '' || $content === '' || $category === '') {
-        array_push($errorMsg, "All fields must be filled!");
-    } elseif (mb_strlen($title, 'UTF8') < 5) {
-        array_push($errorMsg, "Article title must include at least 5 symbols!");
-    } else {
-        $article = [
-            'id_user' => $_SESSION['id'],
-            'title' => $title,
-            'content' => $content,
-            'img' => $_POST['img'],
-            'status' => $publish,
-            'id_category' => $category
+        $user = [
+            'admin' => $admin,
+            'username' => $username,
+            /*'login' => $login,
+            'email' => $email,*/
+            'password' => $pass
         ];
-        $article = update('articles', $id, $article);
-        header('location: ' . BASE_URL . 'admin/articles/index.php');
+        $user = update('users', $id, $user);
+        header('location: ' . BASE_URL . 'admin/users/index.php');
     }
+} else {
+    $username = '';
+    $email = '';
+    $login = '';
 }
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])) {
+/*if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])) {
     $id = $_GET['pub_id'];
     $publish = $_GET['publish'];
 
     $articleId = update('articles', $id, ['status'=> $publish]);
     header('location: ' . BASE_URL . 'admin/articles/index.php');
     exit();
-}
+}*/
 ?>

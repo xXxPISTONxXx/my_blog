@@ -1,6 +1,7 @@
 <?php
 include('path.php');
 include("logic/controllers/categories.php");
+$articles = selectAllFromArticlesWithUsersOnIndex('articles', 'users');
 
 ?>
 
@@ -83,36 +84,34 @@ include("logic/controllers/categories.php");
             <!--Main content-->
                 <div class="main-content col-md-9 col-12">
                     <h2>Latest articles</h2>
+                        <?php foreach ($articles as $article): ?>
                         <div class="post row">
                             <div class="img col-12 col-md-4">
-                                <img src="front/images/image4.jpeg" class="img-thumbnail">
+                                <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>" class="img-thumbnail">
                             </div>
                                 <div class="post-text col-12 col-md-8">
-                                    <h3>Lorem ipsum!
-                                        <a href="">Lorem ipsum!</a>
+                                    <h3>
+                                        <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
                                     </h3>
-                                    <i class="far fa-user"> Author name</i>
-                                    <i class="far fa-calendar-alt"> Date</i>
+                                    <i class="far fa-user"> <?=$article['username']; ?></i>
+                                    <i class="far fa-calendar-alt"> <?=$article['pubdate']; ?></i>
                                     <p class="preview-text">
-                                        Lorem ipsum. Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                                        Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                                        Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                                        Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                                        Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                                    </p>
+                                        <?=mb_substr($article['content'], 0, 150, 'UTF-8') . '...'  ?>
+                                    <!--</p>
                                     <a href="">
                                         Read More...</a>
-                                    </p>
-                                    <div class="mt-1 text-muted">
+                                    </p>-->
+                                    <!--<div class="mt-1 text-muted">
                                         <i class="far fa-comment"> 12</i>
                                         <i class="far fa-eye"> 666</i>
                                     </div>
                                     <div>
                                         <a href="">Photography, Sport</a>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                         </div>
+                        <?php endforeach; ?>
                 </div>
             <!--Sidebar-->
             <div class="sidebar col-md-3 col-12">

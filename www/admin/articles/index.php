@@ -70,7 +70,7 @@ include("../../logic/controllers/articles.php");
                     <?=$key + 1; ?>
                 </div>
                 <div class="col-3">
-                    <?=$article['title']; ?>
+                    <?=mb_substr($article['title'], 0, 40, 'UTF-8') . '...'  ?>
                 </div>
                 <div class="col-2">
                     <?=$article['username']; ?>

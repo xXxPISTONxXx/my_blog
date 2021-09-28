@@ -1,9 +1,7 @@
 <?php
 include("path.php");
-$conn = mysqli_connect("localhost", "root", "root", "my_blog");
-//$result = $conn->query("SELECT * FROM `articles`");
-//$result_cookie = $conn->query("SELECT * FROM `users`");
-//$user = mysqli_fetch_assoc($result_cookie);
+include(dirname(__FILE__)."logic/database/db.php");
+$article = selectOne('articles', ['id' => $_GET['article']])
 ?>
 
 <!doctype html>
