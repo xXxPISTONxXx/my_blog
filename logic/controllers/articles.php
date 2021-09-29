@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_article'])) {
         $imgName = time() . "_" . $_FILES['img']['name'];
         $fileTmpName = $_FILES['img']['tmp_name'];
         $fileType = $_FILES['img']['type'];
-        $destination = ROOT_PATH . "/front/images/articles//" . $imgName;
+        $destination = BASE_URL . "/front/images/articles//" . $imgName;
 
         if (str_contains($fileType, 'image') === false) {
             //Trouble in error viewing (if file not an image !!)
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_article'])) {
         $imgName = time() . "_" . $_FILES['img']['name'];
         $fileTmpName = $_FILES['img']['tmp_name'];
         $fileType = $_FILES['img']['type'];
-        $destination = ROOT_PATH . "/front/images/articles//" . $imgName;
+        $destination = BASE_URL . "/front/images/articles//" . $imgName;
 
         if (str_contains($fileType, 'image') === false) {
             //Trouble in error viewing (if file not an image !!)

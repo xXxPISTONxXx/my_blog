@@ -39,10 +39,10 @@
         } else {
             $existenceMail = selectOne('users', ['email' => $email]);
             if ($existenceMail != false && $existenceMail['email'] === $email) {
-                $errorMsg = "This mail is already used!";
+                array_push($errorMsg,"This mail is already used!");
             } elseif ($existenceLogin = selectOne('users', ['login' => $login])) {
                 if ($existenceLogin != false && $existenceLogin['login'] === $login) {
-                    $errorMsg = "This login is already used!";
+                    array_push($errorMsg,"This login is already used!");
                 }
             }
             else {
@@ -137,8 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])) {
 
             $id = insert('users', $user);
             $user = selectOne('users', ['id' => $id]);
+            header('location: ' . BASE_URL . 'admin/users/index.php');
 
-            $_SESSION['id'] = $user['id'];
+            /*$_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['admin'] = $user['admin'];
 
@@ -146,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])) {
                 header('location: ' . BASE_URL . 'admin/users/index.php');
             } else {
                 header('location: ' . BASE_URL);
-            }
+            }*/
         }
     }
 } else {
@@ -183,23 +184,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])) {
     $admin = isset($_POST['admin']) ? 1 : 0;
 
 
-    if ($username === '' || $email === '' || $login === '') {
-        array_push($errorMsg, "All fields must be filled!");
-    } elseif (mb_strlen($login, 'UTF8') < 2) {
-        array_push($errorMsg, "Login must include at least 2 symbols!");
+    if ($username === '') {
+        array_push($errorMsg, "Username form must be filled!");
     } elseif (mb_strlen($username, 'UTF8') < 5) {
         array_push($errorMsg, "Username must include at least 5 symbols!");
     } elseif ($passwordF !== $passwordS) {
         array_push($errorMsg, "Passwords are not the same!");
     } else {
-        $existenceMail = selectOne('users', ['email' => $email]);
-        if ($existenceMail != false && $existenceMail['email'] === $email) {
-            array_push($errorMsg, "This mail is already used!");
-        } elseif ($existenceLogin = selectOne('users', ['login' => $login])) {
-            if ($existenceLogin != false && $existenceLogin['login'] === $login) {
-                array_push($errorMsg, "This login is already used!");
-            }
-        }
+
 
         $user = [
             'admin' => $admin,
