@@ -151,10 +151,39 @@ function selectAllFromArticlesWithUsers($table1, $table2) {
 //Articles select with userid on main
 function selectAllFromArticlesWithUsersOnIndex($table1, $table2) {
     global $pdo;
-    $sql = "
-    SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.status=1";
+    $sql = "SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.status=1";
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
     return $query->fetchAll();
+}
+
+//Articles select with TOP on main
+function selectTopCategoryFromArticlesOnIndex($table1) {
+    global $pdo;
+    $sql = "SELECT * FROM $table1 WHERE id_category = 9";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+//Search articles title/content
+function searchInTitleAndContent($text, $table1, $table2) {
+    $text = trim(strip_tags(stripcslashes(htmlspecialchars($text))));
+    global $pdo;
+    $sql = "SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.status=1
+    AND a.title LIKE '%$text%' OR a.content LIKE '%$text%'";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+//Article select with userid on single
+function selectArticleFromArticlesWithUsersOnSingle($table1, $table2, $id) {
+    global $pdo;
+    $sql = "SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.id=$id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetch();
 }

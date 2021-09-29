@@ -1,7 +1,7 @@
 <?php
 include("path.php");
-include(dirname(__FILE__)."logic/database/db.php");
-$article = selectOne('articles', ['id' => $_GET['article']])
+include("logic/controllers/categories.php");
+$article = selectArticleFromArticlesWithUsersOnSingle('articles', 'users', $_GET['article']);
 ?>
 
 <!doctype html>
@@ -41,61 +41,43 @@ $article = selectOne('articles', ['id' => $_GET['article']])
 <?php include("include/header.php"); ?>
 
 <!--Error if not found-->
-<?php
-$article = $conn->query("SELECT * FROM `articles` WHERE `id` = " . (int) $_GET['id']);
-if (mysqli_num_rows($article) <= 0)
-{
-?>
-<div class="container">
+
+<!--<div class="container">
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-            <!-- <strong class="d-inline-block mb-2 text-primary">World</strong> -->
             <h3 class="mb-0">Ooops... Something is going wrong!</h3>
-            <p class="card-text mb-auto">Article not found!</p>
+            <p class="card-text mb-auto">Article not found!</p>-->
 
-            <?php } else
-            {
-            $new_post = mysqli_fetch_assoc($article);
-            ?>
 <!--Main block-->
 <div class="container">
     <div class="content row">
         <!--Main content-->
         <div class="main-content col-md-9 col-12">
-            <h2><?php
-                echo $new_post['title'];?>
+            <h2><?=$article['title'];?>
             </h2>
                 <div class="single-post row">
                     <div class="img col-12">
-                        <img src="front/images/image4.jpeg" class="img-thumbnail">
+                        <img src="<?=BASE_URL . 'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>"
+                        class="img-thumbnail">
                     </div>
                     <div class="info">
-                        <i class="far fa-user"> Author name</i><br>
+                        <i class="far fa-user"> <?=$article['username'];?></i><br>
                         <i class="far fa-calendar-alt">
-
-                        <?php
-                        echo $mysqldate = date("j M y",strtotime($new_post['pubdate']))
-                        ?>
+                        <?=$mysqldate = date("j M y",strtotime($article['pubdate']));?>
                     </i>
                     </div>
 
                     <div class="single-post-text col-12">
-                        <p>
-                            <a><?php echo $new_post['text'];?>
-                        </p>
-
-                       <div class="info-static mt-1 text-muted">
+                        <p><?=$article['content'];?></p>
+                       <!--<div class="info-static mt-1 text-muted">
                             <i class="far fa-comment"> 12</i>
                             <i class="far fa-eye"> 666</i>
                         </div>
                         <div>
                             <a href="">Photography, Sport</a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
-                <?php
-            }
-            ?>
         </div>
         <!--Sidebar-->
         <div class="sidebar col-md-3 col-12">
@@ -108,16 +90,14 @@ if (mysqli_num_rows($article) <= 0)
             <div class="section categories">
                 <h3>Categories</h3>
                 <ul>
-                    <li><a href="#">Automobiles</a></li>
-                    <li><a href="#">Life</a></li>
-                    <li><a href="#">Sport</a></li>
-                    <li><a href="#">Nature</a></li>
-                    <li><a href="#">Photography</a></li>
+                    <?php foreach($categories as $key => $category): ?>
+                        <li><a href="<?=BASE_URL . 'category.php?id=' . $category['id'];?>"><?=$category['name'];?></a></li>
+                    <?php endforeach; ?>
+
                 </ul>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!--Main block ending-->
 

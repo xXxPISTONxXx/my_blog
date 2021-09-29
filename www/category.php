@@ -1,9 +1,10 @@
 <?php
 include('path.php');
 include("logic/controllers/categories.php");
-$articles = selectAllFromArticlesWithUsersOnIndex('articles', 'users');
+/*$articlesUser = selectAllFromArticlesWithUsersOnIndex('articles', 'users');*/
+$articles = selectAll('articles', ['id_category' => $_GET['id']]);
 $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
-
+$category = selectOne('categories', ['id' => $_GET['id']]);
 ?>
 
 <!doctype html>
@@ -41,44 +42,13 @@ $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
 
 
     <?php include("include/header.php"); ?>
-    <!-- Carousel -->
-<div class="container">
-    <div class="row">
-        <h3 class="carousel-title">Top articles</h3>
-    </div>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php foreach($topCategory as $key => $article): ?>
-                    <?php if($key == 0): ?>
-                    <div class="carousel-item active">
-                    <?php else: ?>
-                    <div class="carousel-item">
-                    <?php endif; ?>
-                <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?> class="d-block w-100">
-                <div class="carousel-caption-hack d-none d-md-block">
-                    <h5><a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
-                    </h5>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-    <!-- Carousel ending -->
+
     <!--Main block-->
 <div class="container">
         <div class="content row">
             <!--Main content-->
                 <div class="main-content col-md-9 col-12">
-                    <h2>Latest articles</h2>
+                    <h2>Articles from category <strong><?=$category['name'];?></strong></h2>
                         <?php foreach ($articles as $article): ?>
                         <div class="post row">
                             <div class="img col-12 col-md-4">
@@ -88,7 +58,7 @@ $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
                                     <h3>
                                         <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
                                     </h3>
-                                    <i class="far fa-user"> <?=$article['username']; ?></i>
+                                    <i class="far fa-user"> <!--$article['username'];--> </i>
                                     <i class="far fa-calendar-alt"> <?=$mysqldate = date("j M y",strtotime($article['pubdate'])); ?></i>
                                     <p class="preview-text">
                                         <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
