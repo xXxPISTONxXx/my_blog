@@ -149,9 +149,14 @@ function selectAllFromArticlesWithUsers($table1, $table2) {
 }
 
 //Articles select with userid on main
-function selectAllFromArticlesWithUsersOnIndex($table1, $table2) {
+function selectAllFromArticlesWithUsersOnIndex($table1, $table2, $limit, $offset) {
     global $pdo;
-    $sql = "SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.status=1";
+    $sql = "SELECT a.*, u.username 
+    FROM $table1 AS a JOIN $table2 AS u 
+    ON a.id_user = u.id 
+    WHERE a.status=1 
+    ORDER BY a.pubdate DESC
+    LIMIT $limit OFFSET $offset";
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
@@ -186,4 +191,73 @@ function selectArticleFromArticlesWithUsersOnSingle($table1, $table2, $id) {
     $query->execute();
     dbCheckError($query);
     return $query->fetch();
+}
+//Article select for pagination
+function countRow($table) {
+    global $pdo;
+    $sql = "SELECT COUNT(*) FROM $table WHERE status = 1";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchColumn();
+}
+
+//SELECT count articles of one cat
+function countRowCat($table, $params = []) {
+    $sql = "SELECT COUNT(*) FROM $table";
+    global $pdo;
+    if (!empty($params)) {
+        $i = 0;
+        foreach ($params as $key => $value) {
+            if (!is_numeric($value)) {
+                $value = "'".$value."'";
+            }
+            if ($i === 0) {
+                $sql = $sql . " WHERE $key=$value";
+            } else {
+                $sql = $sql . " AND $key=$value";
+            }
+            $i++;
+        }
+
+    }
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchColumn();
+}
+
+//Articles select with userid on main
+function selectAllFromArticlesWithUsersWithCat($table1, $table2, $id, $limit, $offset) {
+    global $pdo;
+    $sql = "SELECT a.*, u.username 
+    FROM $table1 AS a 
+    JOIN $table2 AS u 
+    ON a.id_user = u.id 
+    WHERE a.status=1 
+    AND a.id_category=$id
+    ORDER BY a.pubdate DESC
+    LIMIT $limit OFFSET $offset";
+    global $pdo;
+    if (!empty($params)) {
+        $i = 0;
+        foreach ($params as $key => $value) {
+            if (!is_numeric($value)) {
+                $value = "'".$value."'";
+            }
+            if ($i === 0) {
+                $sql = $sql . " WHERE $key=$value";
+            } else {
+                $sql = $sql . " AND $key=$value";
+            }
+            $i++;
+        }
+
+    }
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
 }

@@ -1,9 +1,15 @@
 <?php
 include('path.php');
 include("logic/controllers/categories.php");
-$articles = selectAllFromArticlesWithUsersOnIndex('articles', 'users');
-$topCategory = selectTopCategoryFromArticlesOnIndex('articles');
 
+$page = isset($_GET['page']) ? $_GET['page']: 1;
+$limit = 4;
+$offset = $limit * ($page - 1);
+$total_pages = round(countRow('articles') / $limit, 0);
+
+
+$articles = selectAllFromArticlesWithUsersOnIndex('articles', 'users', $limit, $offset);
+$topCategory = selectTopCategoryFromArticlesOnIndex('articles');
 ?>
 
 <!doctype html>
@@ -25,7 +31,7 @@ $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <title>My blog</title>
+    <title>#ЯРОДИЛСЯ</title>
 </head>
 <body>
 <!-- Optional JavaScript; choose one of the two! -->
@@ -107,6 +113,7 @@ $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
                                 </div>
                         </div>
                         <?php endforeach; ?>
+                <?php include("include/pagination.php"); ?>
                 </div>
             <!--Sidebar-->
             <div class="sidebar col-md-3 col-12">
@@ -130,20 +137,6 @@ $topCategory = selectTopCategoryFromArticlesOnIndex('articles');
     </div>
 </div>
     <!--Main block ending-->
-
-
-            <!--<div class="container">
-                    <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                    </nav>
-            </div>-->
-
         <?php include("include/footer.php"); ?>
 </body>
 </html>

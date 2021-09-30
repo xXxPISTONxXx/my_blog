@@ -30,7 +30,7 @@ input {
 /* header
 */
 header{
-    background: aliceblue;
+    background: #f3f3f3;
     height: 58px;
 }
 /* all in header
@@ -67,7 +67,7 @@ header ul li a{
     padding: 17px;
 }
 header ul li a:hover{
-    background: lightblue;
+    background: #b5b8be;
     transition: 0.5s;
     color: black;
 }
@@ -87,7 +87,7 @@ header ul li ul li{
 }
 header ul li ul li a{
     padding: 10px;
-    background: aliceblue;
+    background: #f3f3f3;
 }
 /*
 Carousel

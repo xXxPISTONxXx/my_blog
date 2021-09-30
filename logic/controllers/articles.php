@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_article'])) {
         $imgName = time() . "_" . $_FILES['img']['name'];
         $fileTmpName = $_FILES['img']['tmp_name'];
         $fileType = $_FILES['img']['type'];
-        $destination = BASE_URL . "/front/images/articles//" . $imgName;
+        $destination = "../../front/images/articles/" . $imgName;
 
-        if (str_contains($fileType, 'image') === false) {
+        if (strpos($fileType, 'image') === false) {
             //Trouble in error viewing (if file not an image !!)
             array_push($errorMsg, "Uploaded file is not image!");
         } else {
@@ -97,9 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_article'])) {
         $imgName = time() . "_" . $_FILES['img']['name'];
         $fileTmpName = $_FILES['img']['tmp_name'];
         $fileType = $_FILES['img']['type'];
-        $destination = BASE_URL . "/front/images/articles//" . $imgName;
+        $destination = "../../front/images/articles/" . $imgName;
 
-        if (str_contains($fileType, 'image') === false) {
+        if (strpos($fileType, 'image') === false) {
             //Trouble in error viewing (if file not an image !!)
             array_push($errorMsg, "Uploaded file is not image!");
         } else {

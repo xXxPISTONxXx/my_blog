@@ -1,10 +1,18 @@
 <?php
 include('path.php');
 include("logic/controllers/categories.php");
-/*$articlesUser = selectAllFromArticlesWithUsersOnIndex('articles', 'users');*/
-$articles = selectAll('articles', ['id_category' => $_GET['id']]);
-$topCategory = selectTopCategoryFromArticlesOnIndex('articles');
+$page = isset($_GET['page']) ? $_GET['page']: 1;
+$limit = 2;
+$offset = $limit * ($page - 1);
+
+$total_pages = round(countRowCat('articles', ['id_category' => $_GET['id']]) / $limit, 0);
+
+
+$articles = selectAllFromArticlesWithUsersWithCat('articles', 'users', $_GET['id'],  $limit, $offset );
+
+/*$topCategory = selectTopCategoryFromArticlesOnIndex('articles');*/
 $category = selectOne('categories', ['id' => $_GET['id']]);
+
 ?>
 
 <!doctype html>
@@ -26,7 +34,7 @@ $category = selectOne('categories', ['id' => $_GET['id']]);
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <title>My blog</title>
+    <title>#ЯРОДИЛСЯ</title>
 </head>
 <body>
 <!-- Optional JavaScript; choose one of the two! -->
@@ -58,7 +66,7 @@ $category = selectOne('categories', ['id' => $_GET['id']]);
                                     <h3>
                                         <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
                                     </h3>
-                                    <i class="far fa-user"> <!--$article['username'];--> </i>
+                                    <i class="far fa-user"> <?=$article['username']; ?></i>
                                     <i class="far fa-calendar-alt"> <?=$mysqldate = date("j M y",strtotime($article['pubdate'])); ?></i>
                                     <p class="preview-text">
                                         <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
@@ -77,7 +85,9 @@ $category = selectOne('categories', ['id' => $_GET['id']]);
                                 </div>
                         </div>
                         <?php endforeach; ?>
+                    <?php include("include/pagination_cat.php"); ?>
                 </div>
+
             <!--Sidebar-->
             <div class="sidebar col-md-3 col-12">
                 <div class="section search">

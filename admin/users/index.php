@@ -23,7 +23,7 @@ include("../../logic/controllers/users.php");
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <title>My blog</title>
+    <title>#ЯРОДИЛСЯ ОДМЭН</title>
 </head>
 <body>
 <!-- Optional JavaScript; choose one of the two! -->
@@ -81,17 +81,33 @@ include("../../logic/controllers/users.php");
                 <div class="col-2">
                     Admin
                 </div>
+                <?php elseif ($user['admin'] == 2): ?>
+                <div class="col-2">
+                    Creator
+                </div>
                 <?php else: ?>
                 <div class="col-2">
                     User
                 </div>
                 <?php endif; ?>
+                <?php if ($user['admin'] == 2): ?>
+                <div class="edit col-2">
+                    <a href=""></a>
+                </div>
+                <?php else: ?>
                 <div class="edit col-2">
                     <a href="edit.php?edit_id=<?=$user['id']; ?>">Edit</a>
                 </div>
+                <?php endif; ?>
+                <?php if ($user['admin'] == 2): ?>
+                <div class="delete col-2">
+                    <a href=""></a>
+                </div>
+                <?php else: ?>
                 <div class="delete col-2">
                     <a href="index.php?delete_id=<?=$user['id']; ?>">Delete</a>
                 </div>
+                <?php endif;?>
             </div>
             <?php endforeach; ?>
         </div>
