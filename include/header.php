@@ -1,25 +1,26 @@
 <header class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-6 col-12">
                 <h2>
-                    <a href="<?php echo BASE_URL ?>">MY BLOG</a>
+                    <a href="<?php echo BASE_URL ?>">#ЯРОДИЛСЯ</a>
                 </h2>
             </div>
             <?php
             if(isset($_SESSION['id']) == ''):
                 ?>
-                <nav class="col-8">
+            <div class="col-md-6 col-12">
+                <nav class="">
                     <ul>
                         <li><a href="<?php echo BASE_URL ?>">MAIN</a></li>
 
                         <!-- <li><a href="#">LOL</a></li> -->
-                        <li><a href="#">
+                        <li><a>
                                 ABOUT ME
                             </a>
                             <ul>
-                                <li><a href="">WHO I AM?</a></li>
-                                <li><a href="">CONTACT ME!</a></li>
+                                <li><a href="<?php echo BASE_URL . 'about.php' ?>">WHO I AM?</a></li>
+                                <li><a href="<?php echo BASE_URL . 'contact.php' ?>">CONTACT ME!</a></li>
                             </ul>
                         </li>
                         <li>
@@ -35,16 +36,18 @@
                         </li>
                     </ul>
                 </nav>
+            </div>
             <?php else:?>
-                <nav class="col-8">
+            <div class="col-md-6 col-12">
+                <nav class="">
                     <ul>
                         <li><a href="<?php echo BASE_URL ?>">MAIN</a></li>
-                        <li><a href="#">
+                        <li><a>
                                 ABOUT ME
                             </a>
                             <ul>
-                                <li><a href="">WHO I AM?</a></li>
-                                <li><a href="">CONTACT ME!</a></li>
+                                <li><a href="<?php echo BASE_URL . 'about.php' ?>">WHO I AM?</a></li>
+                                <li><a href="<?php echo BASE_URL . 'contact.php' ?>">CONTACT ME!</a></li>
                             </ul>
                         </li>
                         <li>
@@ -63,6 +66,7 @@
                         </li>
                     </ul>
                 </nav>
+            </div>
             <?php endif;?>
         </div>
     </div>

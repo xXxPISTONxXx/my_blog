@@ -128,7 +128,7 @@ function delete($table, $id) {
 }
 
 //Articles select with userid
-function selectAllFromArticlesWithUsers($table1, $table2) {
+function selectAllFromArticlesWithUsers($table1, $table2, $limit, $offset) {
     global $pdo;
     $sql = "
     SELECT  
@@ -140,8 +140,11 @@ function selectAllFromArticlesWithUsers($table1, $table2) {
     t1.id_category,
     t1.pubdate,
     t2.username
-    FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_user = t2.id
-    ";
+    FROM $table1 AS t1 JOIN $table2 
+    AS t2 ON t1.id_user = t2.id
+    ORDER BY t1.pubdate DESC
+    LIMIT $limit OFFSET $offset";
+
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
@@ -186,7 +189,10 @@ function searchInTitleAndContent($text, $table1, $table2) {
 //Article select with userid on single
 function selectArticleFromArticlesWithUsersOnSingle($table1, $table2, $id) {
     global $pdo;
-    $sql = "SELECT a.*, u.username FROM $table1 AS a JOIN $table2 AS u ON a.id_user = u.id WHERE a.id=$id";
+    $sql = "SELECT a.*, u.username FROM $table1 
+    AS a JOIN $table2 
+    AS u ON a.id_user = u.id 
+    WHERE a.id = $id";
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
@@ -203,29 +209,18 @@ function countRow($table) {
 }
 
 //SELECT count articles of one cat
-function countRowCat($table, $params = []) {
-    $sql = "SELECT COUNT(*) FROM $table";
+function countRowCat($table, $id) {
+    $sql =
+        "SELECT COUNT(*) FROM $table 
+        WHERE status = 1
+        AND id_category=$id";
     global $pdo;
-    if (!empty($params)) {
-        $i = 0;
-        foreach ($params as $key => $value) {
-            if (!is_numeric($value)) {
-                $value = "'".$value."'";
-            }
-            if ($i === 0) {
-                $sql = $sql . " WHERE $key=$value";
-            } else {
-                $sql = $sql . " AND $key=$value";
-            }
-            $i++;
-        }
-
-    }
 
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
     return $query->fetchColumn();
+
 }
 
 //Articles select with userid on main
@@ -240,21 +235,42 @@ function selectAllFromArticlesWithUsersWithCat($table1, $table2, $id, $limit, $o
     ORDER BY a.pubdate DESC
     LIMIT $limit OFFSET $offset";
     global $pdo;
-    if (!empty($params)) {
-        $i = 0;
-        foreach ($params as $key => $value) {
-            if (!is_numeric($value)) {
-                $value = "'".$value."'";
-            }
-            if ($i === 0) {
-                $sql = $sql . " WHERE $key=$value";
-            } else {
-                $sql = $sql . " AND $key=$value";
-            }
-            $i++;
-        }
 
-    }
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+//SELECT count of adm
+function countRowAdm($table) {
+    $sql = "SELECT COUNT(*) FROM $table";
+    global $pdo;
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchColumn();
+
+}
+/*function selectAllFromArticlesWithUsersOnAdm($table1, $table2, $limit, $offset) {
+    global $pdo;
+    $sql = "SELECT a.*, u.username 
+    FROM $table1 AS a JOIN $table2 AS u 
+    ON a.id_user = u.id 
+    WHERE a.status=1 
+    ORDER BY a.pubdate DESC
+    LIMIT $limit OFFSET $offset";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}*/
+
+//SELECT require form one table
+function selectAllforAdm($table, $limit, $offset) {
+    $sql = "SELECT * FROM $table LIMIT $limit OFFSET $offset";
+    global $pdo;
 
     $query = $pdo->prepare($sql);
     $query->execute();

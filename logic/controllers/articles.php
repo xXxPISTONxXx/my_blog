@@ -17,7 +17,7 @@ $category = '';
 //Categories listing
 $categories = selectAll('categories');
 $articles = selectAll('articles');
-$articlesAdm = selectAllFromArticlesWithUsers('articles', 'users');
+
 
 
 //Article create
@@ -91,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_article'])) {
     $content = trim($_POST['content']);
     $category = trim($_POST['category']);
     $publish = isset($_POST['publish']) ? 1 : 0;
-
     //Need function
     if (!empty($_FILES['img']['name'])) {
         $imgName = time() . "_" . $_FILES['img']['name'];
@@ -132,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_article'])) {
         header('location: ' . BASE_URL . 'admin/articles/index.php');
     }
 }
+//Status
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])) {
     $id = $_GET['pub_id'];
     $publish = $_GET['publish'];

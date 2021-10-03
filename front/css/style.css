@@ -27,11 +27,18 @@ input {
     color: dimgrey;
     font-size: 16px;
 }
+.page-main{
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
 /* header
 */
 header{
     background: #f3f3f3;
-    height: 58px;
+    position: relative;
+    margin-top: auto;
 }
 /* all in header
 header *{
@@ -48,6 +55,9 @@ header h2{
 */
 header h2 a:hover{
     color: black;
+}
+header nav{
+    position: relative;
 }
 header ul{
     margin: 0;
@@ -194,6 +204,7 @@ Footer
     background: #1f1f1f;
     color: white;
     position: relative;
+    margin-top: auto;
 }
 .footer .footer-section{
     padding: 22px;
@@ -270,10 +281,26 @@ Single article
     color: slategrey;
 }
 /*
-Reg form
+Reg form/auth
  */
+
+.auth-form{
+    margin: auto;
+}
+.auth-form h2{
+    text-align: center;
+    margin: 30px 0;
+}
+.auth-form .btn{
+    transition: 0.3s;
+}
+.auth-form .btn:hover{
+    transition: 0.3s;
+    color: darkgrey;
+}
 .reg-form{
     margin-bottom: 30px;
+
 }
 .reg-form h2{
     text-align: center;
@@ -303,4 +330,41 @@ Error msg
 }
 .add-article .err ul{
     list-style-type: none;
+}
+/*
+Comments
+ */
+.all-comments{
+    padding-top: 3rem;
+
+}
+.all-comments h3{
+    margin-bottom: 2rem;
+
+}
+.all-comments .one-comment{
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.all-comments .one-comment i{
+    margin: 0.3rem 0.6rem 0 0;
+    font-weight: 600;
+}
+.all-comments .one-comment span{
+    display: inline-flex;
+    margin: 0.5rem 1.5rem 1.5rem 0;
+    font-weight: 500;
+}
+.comments .comment-allow a{
+    font-weight: 500;
+}
+.comments .comment-allow a:hover{
+    color: black;
+    text-decoration: underline;
+}
+.comments h3{
+    padding-top: 20px;
+    border-top: 1px solid black;
 }

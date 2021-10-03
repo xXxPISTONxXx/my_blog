@@ -1,7 +1,13 @@
 <?php
 include("../../path.php");
 include("../../logic/controllers/categories.php");
+$page = isset($_GET['page']) ? $_GET['page']: 1;
+$limit = 4;
+$offset = $limit * ($page - 1);
 
+
+$total_pages = round(countRowAdm('categories') / $limit, 0);
+$categories = selectAllforAdm('categories', $limit, $offset);
 ?>
 
 <!doctype html>
@@ -80,6 +86,7 @@ include("../../logic/controllers/categories.php");
                 </div>
             </div>
             <?php endforeach;?>
+            <?php include("../../include/pagination_adm.php"); ?>
         </div>
     </div>
 </div>

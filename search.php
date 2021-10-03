@@ -40,60 +40,61 @@ include("logic/controllers/categories.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
 -->
 
-
-<?php include("include/header.php"); ?>
-    <!--Main block-->
-    <div class="container">
-        <div class="content row">
-            <!--Main content-->
-            <div class="main-content col-12">
-                <h2>Searching result</h2>
-                <?php foreach ($articles as $article): ?>
-                    <div class="post row">
-                        <div class="img col-12 col-md-4">
-                            <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>" class="img-thumbnail">
-                        </div>
-                        <div class="post-text col-12 col-md-8">
-                            <h3>
-                                <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
-                            </h3>
-                            <i class="far fa-user"> <?=$article['username']; ?></i>
-                            <i class="far fa-calendar-alt"> <?=$article['pubdate']; ?></i>
-                            <p class="preview-text">
-                                <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
-                                <!--</p>
-                                <a href="">
-                                    Read More...</a>
-                                </p>-->
-                                <!--<div class="mt-1 text-muted">
-                                    <i class="far fa-comment"> 12</i>
-                                    <i class="far fa-eye"> 666</i>
+<div class="page-main">
+        <?php include("include/header.php"); ?>
+            <!--Main block-->
+            <div class="container">
+                <div class="content row">
+                    <!--Main content-->
+                    <div class="main-content col-12">
+                        <h2>Searching result</h2>
+                        <?php foreach ($articles as $article): ?>
+                            <div class="post row">
+                                <div class="img col-12 col-md-4">
+                                    <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>" class="img-thumbnail">
                                 </div>
-                                <div>
-                                    <a href="">Photography, Sport</a>
-                                </div>-->
+                                <div class="post-text col-12 col-md-8">
+                                    <h3>
+                                        <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
+                                    </h3>
+                                    <i class="far fa-user"> <?=$article['username']; ?></i>
+                                    <i class="far fa-calendar-alt"> <?=$article['pubdate']; ?></i>
+                                    <p class="preview-text">
+                                        <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
+                                        <!--</p>
+                                        <a href="">
+                                            Read More...</a>
+                                        </p>-->
+                                        <!--<div class="mt-1 text-muted">
+                                            <i class="far fa-comment"> 12</i>
+                                            <i class="far fa-eye"> 666</i>
+                                        </div>
+                                        <div>
+                                            <a href="">Photography, Sport</a>
+                                        </div>-->
 
-                        </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                </div>
             </div>
-        </div>
-    </div>
-<!--Main block ending-->
+        <!--Main block ending-->
 
 
-<!--<div class="container">
-        <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-        </nav>
-</div>-->
+        <!--<div class="container">
+                <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+                </nav>
+        </div>-->
 
-<?php include("include/footer.php"); ?>
+        <?php include("include/footer.php"); ?>
+</div>
 </body>
 </html>

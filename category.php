@@ -2,15 +2,12 @@
 include('path.php');
 include("logic/controllers/categories.php");
 $page = isset($_GET['page']) ? $_GET['page']: 1;
-$limit = 2;
+$limit = 4;
 $offset = $limit * ($page - 1);
 
-$total_pages = round(countRowCat('articles', ['id_category' => $_GET['id']]) / $limit, 0);
-
-
-$articles = selectAllFromArticlesWithUsersWithCat('articles', 'users', $_GET['id'],  $limit, $offset );
-
-/*$topCategory = selectTopCategoryFromArticlesOnIndex('articles');*/
+$categories = selectAll('categories');
+$total_pages = round(countRowCat('articles', $_GET['id']) / $limit, 0);
+$articles = selectAllFromArticlesWithUsersWithCat('articles', 'users', $_GET['id'], $limit, $offset );
 $category = selectOne('categories', ['id' => $_GET['id']]);
 
 ?>
@@ -36,7 +33,7 @@ $category = selectOne('categories', ['id' => $_GET['id']]);
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>#ЯРОДИЛСЯ</title>
 </head>
-<body>
+<div>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -49,81 +46,81 @@ $category = selectOne('categories', ['id' => $_GET['id']]);
 -->
 
 
-    <?php include("include/header.php"); ?>
+            <?php include("include/header.php"); ?>
 
-    <!--Main block-->
-<div class="container">
-        <div class="content row">
-            <!--Main content-->
-                <div class="main-content col-md-9 col-12">
-                    <h2>Articles from category <strong><?=$category['name'];?></strong></h2>
-                        <?php foreach ($articles as $article): ?>
-                        <div class="post row">
-                            <div class="img col-12 col-md-4">
-                                <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>" class="img-thumbnail">
-                            </div>
-                                <div class="post-text col-12 col-md-8">
-                                    <h3>
-                                        <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
-                                    </h3>
-                                    <i class="far fa-user"> <?=$article['username']; ?></i>
-                                    <i class="far fa-calendar-alt"> <?=$mysqldate = date("j M y",strtotime($article['pubdate'])); ?></i>
-                                    <p class="preview-text">
-                                        <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
-                                    <!--</p>
-                                    <a href="">
-                                        Read More...</a>
-                                    </p>-->
-                                    <!--<div class="mt-1 text-muted">
-                                        <i class="far fa-comment"> 12</i>
-                                        <i class="far fa-eye"> 666</i>
+            <!--Main block-->
+        <div class="container">
+                <div class="content row">
+                    <!--Main content-->
+                        <div class="main-content col-md-9 col-12">
+                            <h2>Articles from category <strong><?=$category['name'];?></strong></h2>
+                                <?php foreach ($articles as $article): ?>
+                                <div class="post row">
+                                    <div class="img col-12 col-md-4">
+                                        <img src="<?=BASE_URL .  'front/images/articles/' . $article['img']; ?>" alt="<?=$article['title']; ?>" class="img-thumbnail">
                                     </div>
-                                    <div>
-                                        <a href="">Photography, Sport</a>
-                                    </div>-->
+                                        <div class="post-text col-12 col-md-8">
+                                            <h3>
+                                                <a href="<?=BASE_URL . 'single.php?article=' . $article['id']; ?>"><?=substr($article['title'], 0, 120) . '...'  ?></a>
+                                            </h3>
+                                            <i class="far fa-user"> <?=$article['username']; ?></i>
+                                            <i class="far fa-calendar-alt"> <?=$mysqldate = date("j M y",strtotime($article['pubdate'])); ?></i>
+                                            <p class="preview-text">
+                                                <?=mb_substr($article['content'], 0, 50, 'UTF-8') . '...'  ?>
+                                            <!--</p>
+                                            <a href="">
+                                                Read More...</a>
+                                            </p>-->
+                                            <!--<div class="mt-1 text-muted">
+                                                <i class="far fa-comment"> 12</i>
+                                                <i class="far fa-eye"> 666</i>
+                                            </div>
+                                            <div>
+                                                <a href="">Photography, Sport</a>
+                                            </div>-->
 
+                                        </div>
                                 </div>
+                                <?php endforeach; ?>
+                            <?php include("include/pagination_cat.php"); ?>
                         </div>
-                        <?php endforeach; ?>
-                    <?php include("include/pagination_cat.php"); ?>
-                </div>
 
-            <!--Sidebar-->
-            <div class="sidebar col-md-3 col-12">
-                <div class="section search">
-                    <h3>Search</h3>
-                    <form action="search.php" method="post">
-                        <input type="text" name="search-term" class="text-input" placeholder="Search...">
-                    </form>
-                </div>
-                <div class="section categories">
-                    <h3>Categories</h3>
-                    <ul>
-                        <?php foreach($categories as $key => $category): ?>
-                        <li><a href="<?=BASE_URL . 'category.php?id=' . $category['id'];?>"><?=$category['name'];?></a></li>
-                        <?php endforeach; ?>
+                    <!--Sidebar-->
+                    <div class="sidebar col-md-3 col-12">
+                        <div class="section search">
+                            <h3>Search</h3>
+                            <form action="search.php" method="post">
+                                <input type="text" name="search-term" class="text-input" placeholder="Search...">
+                            </form>
+                        </div>
+                        <div class="section categories">
+                            <h3>Categories</h3>
+                            <ul>
+                                <?php foreach($categories as $key => $category): ?>
+                                <li><a href="<?=BASE_URL . 'category.php?id=' . $category['id'];?>"><?=$category['name'];?></a></li>
+                                <?php endforeach; ?>
 
-                    </ul>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    <!--Main block ending-->
+            <!--Main block ending-->
 
 
-            <!--<div class="container">
-                    <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                    </nav>
-            </div>-->
+                    <!--<div class="container">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                            </nav>
+                    </div>-->
 
-        <?php include("include/footer.php"); ?>
+                <?php include("include/footer.php"); ?>
 </body>
 </html>

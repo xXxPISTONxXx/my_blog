@@ -5,8 +5,7 @@ $id = '';
 $name = '';
 $description = '';
 
-//Categories listing
-$categories = selectAll('categories');
+//Categories listing is on index.php
 
 
 

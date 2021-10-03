@@ -1,12 +1,6 @@
 <?php
 include("../../path.php");
-include("../../logic/controllers/users.php");
-
-$page = isset($_GET['page']) ? $_GET['page']: 1;
-$limit = 4;
-$offset = $limit * ($page - 1);
-$total_pages = round(countRowAdm('users') / $limit, 0);
-$users = selectAllforAdm('users', $limit, $offset);
+include("../../logic/controllers/commentaries.php");
 
 ?>
 
@@ -47,74 +41,53 @@ $users = selectAllforAdm('users', $limit, $offset);
 
 <?php include("../../include/header_admin.php"); ?>
 
+
 <!--Main block-->
 <div class="container">
     <div class="row">
         <?php include("../../include/sidebar_admin.php"); ?>
         <div class="articles col-10">
-            <h3>USERS</h3>
-            <div class="button row">
-                <a href="<?=BASE_URL . 'admin/users/create.php';?>" class="btn btn-primary">Add</a>
-            </div>
+            <h3>COMMENTARIES CONTROL</h3>
             <div class="row title-table">
                 <div class="col-1">
                     ID
                 </div>
-                <div class="col-2">
-                    Login
-                </div>
                 <div class="col-3">
-                    E-mail
+                    Text
                 </div>
                 <div class="col-2">
-                    Administration rights
+                    Author
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     Manage
                 </div>
             </div>
-            <?php foreach ($users as $key => $user): ?>
+            <?php foreach ($commentsForAdm as $key => $comment): ?>
             <div class="row article">
                 <div class="col-1">
-                    <?=$user['id']; ?>
-                </div>
-                <div class="col-2">
-                    <?=$user['login']; ?>
+                    <?=$comment['id']; ?>
                 </div>
                 <div class="col-3">
-                    <?=$user['email']; ?>
+                    <?=mb_substr($comment['comment'], 0, 40, 'UTF-8') . '...'  ?>
                 </div>
-                <?php if ($user['admin'] == 1): ?>
                 <div class="col-2">
-                    Admin
+                    <?=$comment['username']; ?>
                 </div>
-                <?php elseif ($user['admin'] == 2): ?>
-                <div class="col-2">
-                    Creator
-                </div>
-                <?php else: ?>
-                <div class="col-2">
-                    User
-                </div>
-                <?php endif; ?>
-                <?php if ($user['admin'] == 2): ?>
                 <div class="edit col-2">
-                    <a href=""></a>
+                    <a href="edit.php?id=<?=$comment['id'] ;?>">Edit</a>
                 </div>
+                <div class="delete col-2">
+                    <a href="edit.php?delete_id=<?=$comment['id'] ;?>">Delete</a>
+                </div>
+                <?php if ($comment['status']): ?>
+                    <div class="status col-2">
+                        <a href="edit.php?publish=0&pub_id=<?=$comment['id'] ;?>">Archive</a>
+                    </div>
                 <?php else: ?>
-                <div class="edit col-2">
-                    <a href="edit.php?edit_id=<?=$user['id']; ?>">Edit</a>
-                </div>
+                    <div class="status col-2">
+                        <a href="edit.php?publish=1&pub_id=<?=$comment['id'] ;?>">Publish</a>
+                    </div>
                 <?php endif; ?>
-                <?php if ($user['admin'] == 2): ?>
-                <div class="delete col-2">
-                    <a href=""></a>
-                </div>
-                <?php else: ?>
-                <div class="delete col-2">
-                    <a href="index.php?delete_id=<?=$user['id']; ?>">Delete</a>
-                </div>
-                <?php endif;?>
             </div>
             <?php endforeach; ?>
             <?php include("../../include/pagination_adm.php"); ?>

@@ -36,47 +36,48 @@ include("../logic/controllers/users.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
 -->
 
+<div class="page-main">
+        <?php include("../include/header.php"); ?>
 
-<?php include("../include/header.php"); ?>
+        <!--Form block-->
+        <div class="container auth-form">
+            <form class="row justify-content-center" method="post" action="auth_form.php">
+                <h2 class="col-12">PLEASE, SIGN-IN</h2>
+                <div class="mb-3 col-12 col-md-4 err">
+                    <!--Array with errors-->
+                    <?php include("../logic/helpers/error_info.php"); ?>
+                </div>
+                <div class="w-100"></div>
+                <div class="mb-3 col-12 col-md-4">
+                    <label for="formGroupExampleInput" class="form-label">LOGIN</label>
+                    <input type="text" name="login" value="<?=$login;?>" class="form-control" id="formGroupExampleInput" placeholder="">
+                </div>
+                <div class="w-100"></div>
+                <div class="mb-3 col-12 col-md-4">
+                    <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="w-100"></div>
+                <div class="mb-3 col-12 col-md-4">
+                    <button type="submit" name="button-log" class="btn btn-dark">GO!</button>
+                </div>
+            </form>
+        </div>
 
-<!--Form block-->
-<div class="container reg-form">
-    <form class="row justify-content-center" method="post" action="auth_form.php">
-        <h2 class="col-12">PLEASE, SIGN-IN</h2>
-        <div class="mb-3 col-12 col-md-4 err">
-            <!--Array with errors-->
-            <?php include("../logic/helpers/error_info.php"); ?>
-        </div>
-        <div class="w-100"></div>
-        <div class="mb-3 col-12 col-md-4">
-            <label for="formGroupExampleInput" class="form-label">LOGIN</label>
-            <input type="text" name="login" value="<?=$login;?>" class="form-control" id="formGroupExampleInput" placeholder="">
-        </div>
-        <div class="w-100"></div>
-        <div class="mb-3 col-12 col-md-4">
-            <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="w-100"></div>
-        <div class="mb-3 col-12 col-md-4">
-            <button type="submit" name="button-log" class="btn btn-dark">GO!</button>
-        </div>
-    </form>
+
+        <!--<div class="container">
+                <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+                </nav>
+        </div>-->
+
+        <?php include("../include/footer.php"); ?>
 </div>
-
-
-<!--<div class="container">
-        <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-        </nav>
-</div>-->
-
-<?php include("../include/footer.php"); ?>
 </body>
 </html>

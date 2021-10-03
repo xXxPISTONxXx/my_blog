@@ -10,5 +10,8 @@
         <li>
             <a href="<?=BASE_URL . "admin/categories/index.php";?>">Categories</a>
         </li>
+        <li>
+            <a href="<?=BASE_URL . "admin/comments/index.php";?>">Comments</a>
+        </li>
     </ul>
 </div>
