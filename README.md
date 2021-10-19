@@ -26,4 +26,4 @@
 
 Сайт блога: http://ebanutii.lovestoblog.com/
 
-Связаться со мной можно через <a href="https://t.me/ti_ebanutii_ti_chto_delaew"><i class="fab fa-telegram"></i></a>
+Связаться со мной можно <a href="https://t.me/ti_ebanutii_ti_chto_delaew"><i class="fab fa-telegram"></i>здесь</a> или через почту <span><i class="fas fa-envelope"></i> &nbsp; igormarchenko@inbox.ru</span><br>
