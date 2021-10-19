@@ -2,9 +2,9 @@
 
 $driver = 'mysql';
 $host = 'sql203.epizy.com';
-$db_name = 'epiz_29893294_ebanutii';
-$db_user = 'epiz_29893294';
-$db_pass = 'BCfHBrXbMtG8';
+$db_name = 'xxx';
+$db_user = 'xxx';
+$db_pass = 'xxx';
 $charset = 'utf8';
 $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
