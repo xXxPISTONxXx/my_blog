@@ -25,3 +25,5 @@
 Спасибо за внимание!
 
 Сайт блога: http://ebanutii.lovestoblog.com/
+
+Связаться со мной можно через <a href="https://t.me/ti_ebanutii_ti_chto_delaew"><i class="fab fa-telegram"></i></a>
